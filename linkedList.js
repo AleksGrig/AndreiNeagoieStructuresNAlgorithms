@@ -103,6 +103,22 @@ class LinkedList{
             this.tail = swap;
         }
     }
+
+    reverseB() {
+        if(this.length > 1) {
+            let first = this.head;
+            let second = first.next;
+            while(second != null) {
+                let temp = second.next;
+                second.next = first;
+                first = second;
+                second = temp;
+            }
+            this.tail = this.head;
+            this.head.next = null;
+            this.head = first;
+        }
+    }
 }
 
 const linkedList = new LinkedList(10);
@@ -114,7 +130,7 @@ linkedList.insert(0, 66);
 linkedList.print();
 linkedList.remove(4);
 linkedList.print();
-linkedList.reverse();
+linkedList.reverseB();
 linkedList.print();
 
 
