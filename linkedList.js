@@ -82,6 +82,27 @@ class LinkedList{
         }
         this.length--;
     }
+
+    reverse() {
+        if(this.length > 1) {
+            let array = [];
+            let currentNode = this.head;
+            while(currentNode != null) {
+                array.push(currentNode.value);
+                currentNode = currentNode.next;
+            }
+            let j = array.length - 2;
+            let newHead = this.tail;
+            while(j >= 0) {
+                let newNode = new Node(array[j--]);
+                newHead.next = newNode;
+                newHead = newHead.next;                
+            }
+            let swap = this.head;
+            this.head = this.tail;
+            this.tail = swap;
+        }
+    }
 }
 
 const linkedList = new LinkedList(10);
@@ -92,6 +113,8 @@ linkedList.prepend(1);
 linkedList.insert(0, 66);
 linkedList.print();
 linkedList.remove(4);
+linkedList.print();
+linkedList.reverse();
 linkedList.print();
 
 
