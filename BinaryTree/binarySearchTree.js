@@ -71,15 +71,64 @@ class BST {
             }
         }
     }
+
+    delete(value) {
+        this.root = this._delete(this.root, value);
+    }
+
+    _delete(node, value) {
+        if(node === null) {
+            return null;
+        } else if(value < node.value){
+            node.left = this._delete(node.left, value);
+        } else if(value > node.value) {
+            node.right = this._delete(node.right, value);
+        } else {
+            if(node.left === null && node.right === null) {
+                node = null;
+            } else if(node.left === null) {
+                node = node.right;
+            } else if(node.right === null) {
+                node = node.left;
+            } else {
+                let rightMin = this._min(node.right);
+                node.value = rightMin.value;
+                node.right = this._delete(node.right, node.value);
+            }
+        }
+        return node;
+    }
+
+    min() {
+        let res = this._min(this.root);
+        if(res != null) {
+            return res.value;
+        }
+    }
+
+    _min(node) {
+        if(node == null || node.left == null) {
+            return node;
+        } else {
+        return this._min(node.left);   
+        }    
+    }
     
 }
 
 var myTree = new BST();
 myTree.insert2(10);
 myTree.insert2(15);
+myTree.insert2(13);
 myTree.insert2(5);
 myTree.insert2(66);
+myTree.insert2(50);
+myTree.insert2(100);
 myTree.traverse();
-console.log(myTree.lookup(66));
+//console.log(myTree.lookup(66));
+console.log(myTree.min());
+console.log('');
+myTree.delete(15);
+myTree.traverse();
 
 
