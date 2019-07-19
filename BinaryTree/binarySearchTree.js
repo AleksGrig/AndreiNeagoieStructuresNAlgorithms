@@ -164,9 +164,10 @@ myTree.insertNonRecursive(66);
 myTree.insertNonRecursive(50);
 myTree.insertNonRecursive(100);
 myTree.traverse();
-console.log('lookup for element 33: ' + myTree.lookupNonRecursive(33));
+console.log('lookup for element 66: ' + myTree.lookupNonRecursive(66));
 console.log('min element is ' + myTree.min());
 console.log('');
+console.log('deleting element 15');
 myTree.delete(15);
 myTree.traverse();
 
