@@ -42,6 +42,30 @@ class BST {
         return node;
     }
 
+    insertNonRecursive(value) {
+        const newNode = new Node(value);
+        if(this.root === null) {
+            this.root = newNode;
+        } else {
+            let currentNode = this.root;
+            while(true) {
+                if(value < currentNode.value) {
+                    if(!currentNode.left) {
+                        currentNode.left = newNode;
+                        return this;
+                    }
+                    currentNode = currentNode.left;
+                } else {
+                    if(!currentNode.right) {
+                        currentNode.right = newNode;
+                        return this;
+                    }
+                    currentNode = currentNode.right;
+                }
+            }
+        }
+    }
+
     traverse() {
         this._traverse(this.root);
     }
@@ -66,6 +90,21 @@ class BST {
                 return this._lookup(node.left, value);
             } else if(node.value < value) {
                 return this._lookup(node.right, value);
+            } else {
+                return true;
+            }
+        }
+    }
+
+    lookupNonRecursive(value) {
+        let currentNode = this.root;
+        while(true) {
+            if(!currentNode) {
+                return false;
+            } else if(value < currentNode.value) {
+                currentNode = currentNode.left;
+            } else if(value > currentNode.value) {
+                currentNode = currentNode.right;
             } else {
                 return true;
             }
@@ -117,16 +156,16 @@ class BST {
 }
 
 var myTree = new BST();
-myTree.insert2(10);
-myTree.insert2(15);
-myTree.insert2(13);
-myTree.insert2(5);
-myTree.insert2(66);
-myTree.insert2(50);
-myTree.insert2(100);
+myTree.insertNonRecursive(10);
+myTree.insertNonRecursive(15);
+myTree.insertNonRecursive(13);
+myTree.insertNonRecursive(5);
+myTree.insertNonRecursive(66);
+myTree.insertNonRecursive(50);
+myTree.insertNonRecursive(100);
 myTree.traverse();
-//console.log(myTree.lookup(66));
-console.log(myTree.min());
+console.log('lookup for element 33: ' + myTree.lookupNonRecursive(33));
+console.log('min element is ' + myTree.min());
 console.log('');
 myTree.delete(15);
 myTree.traverse();
