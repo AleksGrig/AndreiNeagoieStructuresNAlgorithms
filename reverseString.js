@@ -18,6 +18,25 @@ function reverse2(str){
 
 const reverse3 = str => [...str].reverse().join('');
 
+function reverseString(str) {
+    let arrayStr = str.split("");
+    let reversedArray = [];
+    while(arrayStr.length > 0) {
+        reversedArray.push(arrayStr.pop());        
+    }    
+    return reversedArray.join("");
+}
+
+function reverseStringRecursive (str) {
+    if (str === "") {
+      return "";
+    } else {
+      return reverseStringRecursive(str.substr(1)) + str.charAt(0);
+    }
+  }
+
 console.log(reverse1('alex'));
 console.log(reverse2('Hi there!'));
 console.log(reverse3('peace!'));
+console.log(reverseString('peace!!!'));
+console.log(reverseStringRecursive('Aurelius'));
