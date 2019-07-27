@@ -152,6 +152,24 @@ class BST {
         return this._min(node.left);   
         }    
     }
+
+    maxDepth() {
+        if(root !== null) {
+            return this. _maxDepth(this.root, 0, 0);
+        } else {
+            return 0;
+        }
+    }
+
+    _maxDepth(node, leftDepth, rightDepth) {
+        if(node.left !== null) {
+            leftDepth = this._maxDepth(node.left, ++leftDepth, rightDepth);
+        }
+        if(node.right !== null) {
+            rightDepth = this._maxDepth(node.right, leftDepth, ++rightDepth);
+        }
+        return leftDepth >= rightDepth ? leftDepth : rightDepth;
+    }
     
 }
 
@@ -164,6 +182,7 @@ myTree.insertNonRecursive(66);
 myTree.insertNonRecursive(50);
 myTree.insertNonRecursive(100);
 myTree.traverse();
+console.log('maxDepth is ' + myTree.maxDepth());
 console.log('lookup for element 66: ' + myTree.lookupNonRecursive(66));
 console.log('min element is ' + myTree.min());
 console.log('');
