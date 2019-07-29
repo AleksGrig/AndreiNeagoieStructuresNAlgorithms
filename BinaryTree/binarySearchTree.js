@@ -154,7 +154,7 @@ class BST {
     }
 
     maxDepth() {
-        if(root !== null) {
+        if(this.root !== null) {
             return this. _maxDepth(this.root, 0, 0);
         } else {
             return 0;
@@ -170,6 +170,24 @@ class BST {
         }
         return leftDepth >= rightDepth ? leftDepth : rightDepth;
     }
+
+    breadthFirstSearch() {
+        let currentNode = this.root;
+        let resultList = [];
+        let queue = [];
+        queue.push(currentNode);
+        while(queue.length > 0) {
+            currentNode = queue.shift();
+            resultList.push(currentNode.value);
+            if(currentNode.left) {
+                queue.push(currentNode.left);
+            }
+            if(currentNode.right) {
+                queue.push(currentNode.right);
+            }
+        }
+        return resultList;
+    }
     
 }
 
@@ -181,6 +199,8 @@ myTree.insertNonRecursive(5);
 myTree.insertNonRecursive(66);
 myTree.insertNonRecursive(50);
 myTree.insertNonRecursive(100);
+console.log('BFS: ');
+console.log(myTree.breadthFirstSearch());
 myTree.traverse();
 console.log('maxDepth is ' + myTree.maxDepth());
 console.log('lookup for element 66: ' + myTree.lookupNonRecursive(66));
