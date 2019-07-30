@@ -1,13 +1,13 @@
 class Graph {
     constructor() {
-        this.numberOgNodes = 0;
+        this.numberOfNodes = 0;
         this.adjecentList = {};
     }
 
     addVertex(node) {
         if(!this.adjecentList[node]) {
             this.adjecentList[node] = [];
-            this.numberOgNodes++;
+            this.numberOfNodes++;
         }
     }
 
@@ -30,12 +30,41 @@ class Graph {
             console.log(node + " --> " + connections);
         }
     }
+
+    BFS(node, list) {
+        if(this.adjecentList[node]) {
+            let queue = [];
+            let visited = {};
+            queue.push(node);
+            while(queue.length > 0) {
+                node = queue.shift();
+                list.push(node);
+                let connectionsList = this.adjecentList[node];
+                visited[node] = true;
+                for(let i = 0; i < connectionsList.length; i++) {
+                    if(!visited[connectionsList[i]]) {
+                        queue.push(connectionsList[i]);}
+                }
+            }
+        }
+        return list;
+    }
 }
 
 const myGraph = new Graph();
 myGraph.addVertex('0');
 myGraph.addVertex('1');
 myGraph.addVertex('2');
+myGraph.addVertex('3');
+myGraph.addVertex('4');
+myGraph.addVertex('5');
+myGraph.addVertex('6');
 myGraph.addEdge('0', '2');
+myGraph.addEdge('0', '6');
 myGraph.addEdge('0', '1');
+myGraph.addEdge('3', '1');
+myGraph.addEdge('3', '4');
+myGraph.addEdge('3', '5');
 myGraph.showConnections();
+console.log('BFS: ');
+console.log(myGraph.BFS('0', []));
