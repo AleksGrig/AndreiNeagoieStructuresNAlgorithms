@@ -188,6 +188,21 @@ class BST {
         }
         return resultList;
     }
+
+    breadthFirstSearchR(queue, resultList) {
+        if(queue.length === 0) {
+            return resultList;
+        }
+        let currentNode = queue.shift();
+        resultList.push(currentNode.value);
+        if(currentNode.left) {
+            queue.push(currentNode.left);
+        }
+        if(currentNode.right) {
+            queue.push(currentNode.right);
+        }
+        return this.breadthFirstSearchR(queue, resultList);
+    }
     
 }
 
@@ -201,6 +216,8 @@ myTree.insertNonRecursive(50);
 myTree.insertNonRecursive(100);
 console.log('BFS: ');
 console.log(myTree.breadthFirstSearch());
+console.log('BFS Recursive: ');
+console.log(myTree.breadthFirstSearchR([myTree.root], []));
 myTree.traverse();
 console.log('maxDepth is ' + myTree.maxDepth());
 console.log('lookup for element 66: ' + myTree.lookupNonRecursive(66));
