@@ -23,8 +23,7 @@ class Graph {
         for(let node of allNodes) {
             let nodeConnections = this.adjecentList[node];
             let connections = "";
-            let vertex;
-            for(vertex of nodeConnections) {
+            for(let vertex of nodeConnections) {
                 connections += vertex + " ";
             }
             console.log(node + " --> " + connections);
@@ -49,6 +48,25 @@ class Graph {
         }
         return list;
     }
+
+    DFS(node, list) {
+        if(this.adjecentList[node]) {
+            let stack = [];
+            let visited = {};
+            stack.push(node);
+            while(stack.length > 0) {
+                node = stack.pop();
+                list.push(node);
+                let connectionsList = this.adjecentList[node];
+                visited[node] = true;
+                for(let i = 0; i < connectionsList.length; i++) {
+                    if(!visited[connectionsList[i]]) {
+                        stack.push(connectionsList[i]);}
+                }
+            }
+        }
+        return list;
+    }
 }
 
 const myGraph = new Graph();
@@ -68,3 +86,5 @@ myGraph.addEdge('3', '5');
 myGraph.showConnections();
 console.log('BFS: ');
 console.log(myGraph.BFS('0', []));
+console.log('DFS: ');
+console.log(myGraph.DFS('0', []));
