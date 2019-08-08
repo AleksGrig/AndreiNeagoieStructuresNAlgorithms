@@ -204,27 +204,59 @@ class BST {
         return this.breadthFirstSearchR(queue, resultList);
     }
     
+    inOrderDFS() {
+        return this.traverseInOrder(this.root, []);
+    }
+
+    postOrderDFS() {
+        return this.traversePostOrder(this.root, []);
+    }
+
+    preOrderDFS() {
+        return this.traversePreOrder(this.root, []);
+    }
+
+    traverseInOrder(node, list) {
+        if(node !== null) {
+            this.traverseInOrder(node.left, list);
+            list.push(node.value);
+            this.traverseInOrder(node.right, list);
+        }
+        return list;
+    }
+
+    traversePreOrder(node, list) {
+        if(node !== null) {
+            list.push(node.value);
+            this.traversePreOrder(node.left, list);
+            this.traversePreOrder(node.right, list);
+        }
+        return list;
+    }
+
+    traversePostOrder(node, list) {
+        if(node !== null) {
+            this.traversePostOrder(node.left, list);
+            this.traversePostOrder(node.right, list);
+            list.push(node.value);
+        }
+        return list;
+    }
 }
 
 var myTree = new BST();
-myTree.insertNonRecursive(10);
+myTree.insertNonRecursive(9);
+myTree.insert(4);
+myTree.insertNonRecursive(20);
+myTree.insertNonRecursive(1);
+myTree.insertNonRecursive(6);
 myTree.insertNonRecursive(15);
-myTree.insertNonRecursive(13);
-myTree.insertNonRecursive(5);
-myTree.insertNonRecursive(66);
-myTree.insertNonRecursive(50);
-myTree.insertNonRecursive(100);
-console.log('BFS: ');
-console.log(myTree.breadthFirstSearch());
-console.log('BFS Recursive: ');
-console.log(myTree.breadthFirstSearchR([myTree.root], []));
-myTree.traverse();
-console.log('maxDepth is ' + myTree.maxDepth());
-console.log('lookup for element 66: ' + myTree.lookupNonRecursive(66));
-console.log('min element is ' + myTree.min());
-console.log('');
-console.log('deleting element 15');
-myTree.delete(15);
-myTree.traverse();
+myTree.insertNonRecursive(170);
+console.log('InOrderDFS: ');
+console.log(myTree.inOrderDFS());
+console.log('PreOrderDFS: ');
+console.log(myTree.preOrderDFS());
+console.log('PostOrderDFS: ');
+console.log(myTree.postOrderDFS());
 
 
