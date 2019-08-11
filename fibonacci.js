@@ -5,6 +5,22 @@ function fibonacciRecursion(number) {
     return fibonacciRecursion(number - 1) + fibonacciRecursion(number - 2);
 }
 
+function fibonacciMemoized() {
+    let list = {};
+    return function fibonacci(n) {
+        if(n in list) {
+            return list[n];
+        } else {
+            if(n < 2) {
+                list[n] = n;
+            } else {
+                list[n] = fibonacci(n - 1) + fibonacci(n - 2);
+            }
+            return list[n];
+        }
+    }
+}
+
 function fibonacciIterative(number) {
     if(number === 0) {
         return 0;
@@ -35,3 +51,6 @@ function fibonacciIterative2(number) {
 console.log(fibonacciRecursion(14));
 console.log(fibonacciIterative(14));
 console.log(fibonacciIterative2(14));
+
+const memoized = fibonacciMemoized();
+console.log(memoized(14));
