@@ -49,5 +49,24 @@ function binarySearch2(array, value) {
     return false;
 }
 
+function binarySearch3(array, firstIndex, lastIndex, value) {
+    if(firstIndex === lastIndex) {
+        if(array[firstIndex] === value) {
+            return firstIndex;
+        } else {
+            return -1;
+        }
+    }
+    let middleIndex = Math.floor((firstIndex + lastIndex)/2);
+    if(value > array[middleIndex]) {
+        return binarySearch3(array, middleIndex + 1, lastIndex, value);
+    } else if(value < array[middleIndex]) {
+        return binarySearch3(array, firstIndex, middleIndex - 1, value);
+    } else {
+        return middleIndex;
+    }
+}
+
 let array = [0, 1, 3, 4, 5, 6, 7, 15, 56];
 console.log(binarySearch2(array, 0));
+console.log(binarySearch3(array, 0, array.length - 1, 56));
